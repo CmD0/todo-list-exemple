@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useTodoStore } from '@/stores/todos'
 import ToDoDialog from '@/components/ToDoDialog.vue'
 import ToDoItem from '@/components/ToDoItem.vue'
 
-const todos = ref([
-    {text: 'Learn Vue 3', completed: true },
-    {text: 'Build a ToDo app', completed: false }
-])
-console.log(todos)
-console.log(todos.value)
+const {todos, addTodo} = useTodoStore()
 
 function toggleToDo(todo: any) {
     todo.completed = !todo.completed
 }
 
 function addToDo (todo: any) {
-    todos.value.push(todo)
+    addTodo(todo)
 }
 </script>
 
