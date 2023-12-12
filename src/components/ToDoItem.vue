@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const toDoText = ref('This is an example to do item')
+defineEmits(['toggle-todo'])
+const props = defineProps(['todo'])
+
+console.log(props.todo)
 </script>
 
 <template>
-    <div class="to-do-item">
-        <input type="checkbox"/>
-        <p>{{ toDoText }}</p>
+    <div class="to-do-item" :class="{completed: todo.completed}">
+        <input type="checkbox" :checked="todo.completed" @change="$emit('toggle-todo')"/>
+        <p>{{ todo.text }}</p>
     </div>
 </template>
 
@@ -19,6 +21,11 @@ const toDoText = ref('This is an example to do item')
     background-color: #ffe6e6;
     border-radius: 10px;
     border-bottom: 1px solid #f5f5f5;
+}
+
+.to-do-item.completed {
+    background-color: #e6ffe6;
+    text-decoration: line-through;
 }
 
 input[type="checkbox"] {
