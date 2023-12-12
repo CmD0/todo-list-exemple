@@ -5,7 +5,5 @@
 </template>
 
 <style>
-main {
-  padding: 1rem;
-}
+
 </style>
