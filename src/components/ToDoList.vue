@@ -1,21 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useTodoStore } from '@/stores/todos'
 import ToDoDialog from '@/components/ToDoDialog.vue'
 import ToDoItem from '@/components/ToDoItem.vue'
+import { storeToRefs } from 'pinia';
 
-const todos = ref([
-    {text: 'Learn Vue 3', completed: true },
-    {text: 'Build a ToDo app', completed: false }
-])
-console.log(todos)
-console.log(todos.value)
+const todoStore = useTodoStore()
+const {todos} = storeToRefs(todoStore)
+const {addTodo, reset, writeTodos} = todoStore
 
 function toggleToDo(todo: any) {
     todo.completed = !todo.completed
+    writeTodos()
 }
 
 function addToDo (todo: any) {
-    todos.value.push(todo)
+    addTodo(todo)
+}
+
+function clear() {
+    reset()
+    writeTodos()
 }
 </script>
 
@@ -23,6 +27,7 @@ function addToDo (todo: any) {
     <div class="to-do-list">
         <h2>To Do:</h2>
         <ToDoDialog @add-todo="addToDo"/>
+        <button @click="clear">Clear</button>
         <div class="to-dos">
             <ToDoItem v-for="todo in todos" v-bind:todo="todo" @toggle-todo="toggleToDo(todo)" />
         </div>

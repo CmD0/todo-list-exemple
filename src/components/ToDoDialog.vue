@@ -32,12 +32,5 @@ function addToDo() {
     border-radius: 10px;
     border: 1px solid #f5f5f5;
 }
-
-.to-do-dialog button {
-    padding: 0.5rem;
-    border-radius: 10px;
-    border: 1px solid #d5d5d5;
-    background-color: #fafafa;
-}
 </style>
 
